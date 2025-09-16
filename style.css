@@ -11,3 +11,7 @@ body {
 
 p {
 }
+
+aside {
+    float: right;
+}
