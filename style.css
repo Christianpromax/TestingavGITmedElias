@@ -4,6 +4,8 @@ body {
     margin-right: var(--margin-prct);
     margin-left: var(--margin-prct);
 
+    --aside-prct: 20%;
+
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
     background-image: url("Images/Blå_slange.jpg");
@@ -15,5 +17,7 @@ p {
 
 aside {
     float: right;
+    width: var(--aside-prct);
     font-size: 90%;
+    margin-left: 15px;
 }
