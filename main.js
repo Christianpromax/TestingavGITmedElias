@@ -1,6 +1,5 @@
 
 
-// alert("Oi nå ble du bitt av en slange")
 
 
 class Snake {
@@ -19,13 +18,14 @@ class Snake {
 
         this.div_elm.style.position = 'absolute';
         this.div_elm.innerHTML = '<img src="Images/Blå_slange.jpg" alt="snake.png" width="60">';
+        this.div_elm.onclick = () => this.onclick();
 
         let img = this.div_elm.getElementsByTagName("img").item(0);
         this.w = img.width;
         this.h = img.height;
 
-        this.dx = 3 + Math.random() * 200;
-        this.dy = 3 + Math.random() * 200;
+        this.dx = 3 + Math.random() * 20;
+        this.dy = 3 + Math.random() * 20;
     }
 
     update(dt) {
@@ -40,6 +40,14 @@ class Snake {
 
         this.div_elm.style.left = this.x + "px"
         this.div_elm.style.top  = this.y + "px"
+    }
+
+    onclick() {
+        // alert("Oi nå ble du bitt av en slange")
+        this.dx *= 3;
+        this.dy *= 3;
+
+        console.log('Click')
     }
 }
 
