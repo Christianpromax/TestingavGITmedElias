@@ -3,41 +3,70 @@
 // alert("Oi nå ble du bitt av en slange")
 
 
-let snake_div = null;
+class Snake {
+    x  = 0;
+    y  = 0;
+    dx = 0;
+    dy = 0;
 
-let snake_pos = [0,0];
-let snake_vel = [40,30];
-let snake_dim = [];
+    w; h;
+
+    div_elm;
+
+    constructor() {
+        this.div_elm = document.createElement('div');
+        document.body.appendChild(this.div_elm);
+
+        this.div_elm.style.position = 'absolute';
+        this.div_elm.innerHTML = '<img src="Images/Blå_slange.jpg" alt="snake.png" width="60">';
+
+        let img = this.div_elm.getElementsByTagName("img").item(0);
+        this.w = img.width;
+        this.h = img.height;
+
+        this.dx = 3 + Math.random() * 200;
+        this.dy = 3 + Math.random() * 200;
+    }
+
+    update(dt) {
+        this.x += this.dx * dt;
+        this.y += this.dy * dt;
+
+        const width   = window.innerWidth
+        const height  = window.innerHeight
+
+        if (this.x > width  - this.w || this.x < 0)  this.dx *= -1;
+        if (this.y > height - this.h || this.y < 0)  this.dy *= -1;
+
+        this.div_elm.style.left = this.x + "px"
+        this.div_elm.style.top  = this.y + "px"
+    }
+}
+
+
+const snakes = [];
 
 window.onload = (e) => {
-    snake_div = document.getElementsByClassName("snake").item(0)
     
-    let img = snake_div.getElementsByTagName("img").item(0);
-    snake_dim = [img.width, img.height];
 
-    snake_div.addEventListener('onclick', () => {
-        console.log("Click");
+    // snake_div.addEventListener('onclick', () => {
+    //     console.log("Click");
         
-    })
+    // })
 
     setInterval(frame, 5)
     
     console.log("onload");
+
+    for (let i = 0; i < 30; i++) {
+        let snake = new Snake();
+        snakes.push(snake);
+    }
 }
 
 function frame() {
     console.log("Frame");
 
     let dt = 1/60;
-    snake_pos[0] += snake_vel[0] * dt;
-    snake_pos[1] += snake_vel[1] * dt;
-
-    const width   = window.innerWidth
-    const height  = window.innerHeight
-
-    if (snake_pos[0] > width - snake_dim[0] || snake_pos[0] < 0) snake_vel[0] *= -1;
-    if (snake_pos[1] > height - snake_dim[1] || snake_pos[1] < 0) snake_vel[1] *= -1;
-
-    snake_div.style.left = snake_pos[0] + "px"
-    snake_div.style.top  = snake_pos[1] + "px"
+    for (let snake of snakes) snake.update(dt);
 }
