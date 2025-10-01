@@ -17,7 +17,7 @@ class Snake {
         document.body.appendChild(this.div_elm);
 
         this.div_elm.style.position = 'absolute';
-        this.div_elm.innerHTML = '<img src="Images/Blå_slange.jpg" alt="snake.png" width="60">';
+        this.div_elm.innerHTML = '<img src="Images/HenrikSrawr.jpg" alt="HenrikSrawr.jpg" width="60">';
         this.div_elm.onclick = () => this.onclick();
 
         let img = this.div_elm.getElementsByTagName("img").item(0);
